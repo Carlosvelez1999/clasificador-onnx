@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clasificador de Imágenes</title>
+</head>
+<body>
+    <h1>Clasificador de Imágenes (Modelo ONNX)</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <label>Selecciona una imagen:</label><br>
+        <input type="file" name="image" accept="image/*" required><br><br>
+        <input type="submit" value="Clasificar">
+    </form>
+
+    {% if label %}
+        <h2>Resultado</h2>
+        <p><strong>Etiqueta predicha:</strong> {{ label }}</p>
+        <p><strong>Confianza:</strong> {{ confidence | round(2) }}</p>
+    {% endif %}
+</body>
+</html>
