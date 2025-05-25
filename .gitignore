@@ -1,2 +1,3 @@
-# Ignorar modelo pesado
-regnet.onnx
+# Ignorar modelos ONNX descargados
+*.onnx
+
