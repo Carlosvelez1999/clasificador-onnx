@@ -6,3 +6,5 @@ Pillow
 pytz
 gspread
 google-auth
+python-dotenv
+oauth2client
