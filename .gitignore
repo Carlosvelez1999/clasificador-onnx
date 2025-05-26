@@ -1,3 +1,9 @@
 # Ignorar modelos ONNX descargados
 *.onnx
 
+# Ignorar credenciales sensibles
+credentials/credentials.json
+
+# Carpeta de imágenes cargadas por usuarios
+static/uploads/*
+!static/uploads/.gitkeep

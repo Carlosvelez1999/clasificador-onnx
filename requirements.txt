@@ -3,3 +3,6 @@ onnxruntime
 requests
 numpy
 Pillow
+pytz
+gspread
+google-auth
