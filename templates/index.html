@@ -2,21 +2,84 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Clasificador de Imágenes</title>
+    <title>Clasificador de Imágenes (Modelo ONNX)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f9f9f9;
+            text-align: center;
+            padding: 40px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-top: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="file"] {
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .resultado {
+            margin-top: 40px;
+            font-size: 18px;
+            color: #444;
+        }
+
+        .imagen {
+            margin-top: 20px;
+        }
+
+        .imagen img {
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
+
     <h1>Clasificador de Imágenes (Modelo ONNX)</h1>
 
-    <form method="POST" enctype="multipart/form-data">
-        <label>Selecciona una imagen:</label><br>
-        <input type="file" name="image" accept="image/*" required><br><br>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label><strong>Selecciona una imagen:</strong></label><br><br>
+        <input type="file" name="image" required><br>
         <input type="submit" value="Clasificar">
     </form>
 
     {% if label %}
+    <div class="resultado">
         <h2>Resultado</h2>
         <p><strong>Etiqueta predicha:</strong> {{ label }}</p>
-        <p><strong>Confianza:</strong> {{ confidence | round(2) }}</p>
+        <p><strong>Confianza:</strong> {{ (confidence * 100) | round(2) }}%</p>
+        <div class="imagen">
+            <img src="{{ url_for('static', filename='uploads/' + image_filename) }}" width="300px">
+        </div>
+    </div>
     {% endif %}
+
 </body>
 </html>

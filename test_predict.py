@@ -6,4 +6,5 @@ pred_class, confidence = predict(image_path)
 label = get_label(pred_class)
 
 print(f"Clase predicha: {label} (ID: {pred_class})")
-print(f"Confianza: {confidence:.2f}")
+print(f"Confianza: {confidence * 100:.2f}%")
+

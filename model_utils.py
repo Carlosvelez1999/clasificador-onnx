@@ -6,8 +6,8 @@ import onnxruntime as ort
 from PIL import Image
 
 # URL pública del modelo ONNX
-MODEL_URL = "https://github.com/onnx/models/raw/main/Computer_Vision/regnet_x_16gf_Opset18_torch_hub/regnet_x_16gf_Opset18.onnx"
-MODEL_PATH = "regnet.onnx"
+MODEL_URL = "https://github.com/onnx/models/raw/main/Computer_Vision/mobilenetv2_050_Opset18_timm/mobilenetv2_050_Opset18.onnx"
+MODEL_PATH = "mobilenetv2.onnx"
 
 # URL pública del archivo de etiquetas
 LABELS_URL = "https://raw.githubusercontent.com/anishathalye/imagenet-simple-labels/master/imagenet-simple-labels.json"
@@ -64,8 +64,14 @@ def predict(image_path):
     img = preprocess_image(image_path)
     input_name = session.get_inputs()[0].name
     outputs = session.run(None, {input_name: img})
-    pred_class = int(np.argmax(outputs[0]))
-    confidence = float(np.max(outputs[0]))
+
+    def softmax(x):
+        e_x = np.exp(x - np.max(x))
+        return e_x / e_x.sum()
+
+    probs = softmax(outputs[0][0])
+    pred_class = int(np.argmax(probs))
+    confidence = float(np.max(probs))
     return pred_class, confidence
 
 def get_label(index):
