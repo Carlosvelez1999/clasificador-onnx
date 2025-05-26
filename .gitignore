@@ -4,6 +4,9 @@
 # Ignorar credenciales sensibles
 credentials/credentials.json
 
+# Ignorar variables de entorno
+.env
+
 # Carpeta de imágenes cargadas por usuarios
 static/uploads/*
 !static/uploads/.gitkeep
